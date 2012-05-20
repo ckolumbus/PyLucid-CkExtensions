@@ -19,7 +19,7 @@ import os, re
 
 
 @render_to()
-def filelist(request, dir, prefix, expr=".*", template_name="generic/filelist.html", **kwargs): 
+def filelist(request, dir, prefix, expr=".*", template_name="CkGeneric/filelist.html", **kwargs): 
     re_expr =  re.compile(expr)
     f = [x for x in os.listdir(dir) if re_expr.match(x) and os.path.isfile(os.path.join(dir,x)) ]
     f.append("")
