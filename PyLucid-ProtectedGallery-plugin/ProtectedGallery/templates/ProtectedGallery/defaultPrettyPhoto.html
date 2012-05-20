@@ -1,0 +1,58 @@
+{% extends "pylucid/css_anchor_div.html" %}
+
+
+{% block plugin_content %}
+{# We can't use extrahead block here, because it's used in ajax view, too. #}
+<script type="text/javascript" charset="utf-8">
+
+jQuery(document).ready(function(){
+   
+    $(".gallery:first a[rel^='prettyPhoto']").prettyPhoto({animationSpeed:'slow',theme:'light_square',slideshow:10000, autoplay_slideshow: false, overlay_gallery: false});
+    $(".gallery:gt(0) a[rel^='prettyPhoto']").prettyPhoto({animationSpeed:'fast',slideshow:10000});
+    $("#custom_content a[rel^='prettyPhoto']:first").prettyPhoto({
+          custom_markup: '<div id="map_canvas" style="width:260px; height:265px"></div>',
+          changepicturecallback: function(){ initialize(); }
+     });                                                                                   
+    $("#custom_content a[rel^='prettyPhoto']:last").prettyPhoto({
+           custom_markup: '<div id="bsap_1237859" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6" style="height:260px"></div><div id="bsap_1251710" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div>',
+           changepicturecallback: function(){ _bsap.exec(); }
+     });
+ });
+ </script>
+
+<link rel="stylesheet" href="{{ PyLucid_media_url }}prettyphoto/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+<script src="{{ PyLucid_media_url }}prettyphoto/js/jquery.prettyPhoto.js" onerror="JavaScript:alert('Error loading file [{{ PyLucid_media_url }}prettyphoto/js/jquery.prettyPhoto.js] !');" type="text/javascript" charset="utf-8"></script>
+<style>
+.gallery .picture li {list-style:none; display: inline; line-height: 3em;}
+</style>
+
+<fieldset class="directory"><legend>{% trans "Directory" %}</legend>
+<ul>
+{% for dir in dir_info %}
+    <li><a href="{{ dir.href }}">/{{ dir.verbose_name }}/</a> <small>({{ dir.dir_count }} albums, {{ dir.pic_count}} pictures)</small></li>
+{% endfor %}
+</ul>
+</fieldset>
+
+<fieldset class="picture"><legend>{% trans "Pictures" %}</legend>
+<ul>
+{% for picture in picture_info %}
+    <li>
+       <a href="{{ picture.href }}" rel="prettyPhoto[gallery1]" title="{{ picture.verbose_descr }}">
+          <img src="{{ picture.thumb_href }}" alt="{{ picture.verbose_name }}"{% if picture.thumb_width %} width="{{ picture.thumb_width }}" height="{{ picture.thumb_height }}"{% endif %}>
+       </a>
+   </li>
+{% empty %}
+    <li><i>{% trans "No pictures found." %}</i></li>
+{% endfor %}
+</ul>
+</fieldset>
+
+<!--
+<fieldset class="breadcrumbs"><legend>{% trans "Path" %}</legend>
+<p>
+{% for breadcrumb in breadcrumbs %}/<a href="{{ breadcrumb.url }}" title="{{ breadcrumb.title }}">{{ breadcrumb.name }}</a>{% if forloop.last %}/{% endif %}{% endfor %}
+</p>
+</fieldset>
+-->
+{% endblock %}
