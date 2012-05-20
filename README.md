@@ -3,6 +3,14 @@ PyLucid-CkExtensions
 
 My extensions for the PyLucid CMS: plugins, tags, ..
 
+Installation
+------------
+
+Each extension can be activated indivudally by linking the directory within
+an extension into the `pylucid/pylucid_project/external_plugins` directory of
+your `pylucid` source.
+
+
 PyLucid-ProtectedGallery-plugin
 -------------------------------
 
