@@ -1,0 +1,14 @@
+<script type="text/javascript" src="{{ STATIC_URL }}CkExtension/CkGeneric/GM_Utils/GPX2GM.js"></script>
+
+<select class="gpxview">
+    <option value="map::Hybrid"></option>
+{% for f in files %}
+    <option value="map:{{ prefix }}/{{ f }}:Hybrid">{{ f }}</option>
+{% endfor %}
+</select>
+
+<button type="button" class="gpxview:map:skaliere">Zoom to Fit</button>
+<div id="map" class="gpxview" style="width:100%;height:500px"><noscript><p>Javascript needed</p></noscript></div>
+<div id="map_hp" class="no_x" style="width:100%;height:150px;margin-top:10px"><noscript><p>Javascript needed</p></noscript></div>
+<div id="map_sp" class="no_x" style="width:100%;height:150px;margin-top:-37px"><noscript><p>Javascript needed</p></noscript></div>
+
